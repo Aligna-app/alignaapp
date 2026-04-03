@@ -45,27 +45,12 @@ def email_exists(email):
     return result is not None
 
 # -------------------------
-# HEADER
+# HEADER (PERFECT CENTER)
 # -------------------------
-st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-st.image("logo.png", width=90)
-st.markdown("</div>", unsafe_allow_html=True)
+col1, col2, col3 = st.columns([1, 1, 1])
 
-st.markdown(
-    "<h2 style='text-align: center; margin-top: 8px; margin-bottom: 0;'>Stop wasting time on dating apps.</h2>",
-    unsafe_allow_html=True
-)
-
-st.markdown(
-    "<h3 style='text-align: center; margin-top: 8px;'>Meet people who actually match your ambition.</h3>",
-    unsafe_allow_html=True
-)
-
-st.markdown(
-    "<p style='text-align: center; color: #9CA3AF;'>A dating app for ambitious people who want meaningful, aligned relationships — powered by AI.</p>",
-    unsafe_allow_html=True
-)
-
+with col2:
+    st.image("logo.png", width=110)
 # -------------------------
 # SOCIAL PROOF / URGENCY
 # -------------------------
