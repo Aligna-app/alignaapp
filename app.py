@@ -45,15 +45,19 @@ def email_exists(email):
     return result is not None
 
 # -------------------------
-# HEADER (LOGO ONLY)
+# HEADER
 # -------------------------
-left, center, right = st.columns([1.4, 1, 1.4])
-
-with center:
-    st.image("logo.png", width=90)
+st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
+st.image("logo.png", width=90)
+st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown(
-    "<h2 style='text-align: center; margin-top: 10px;'>No more swiping. Just real connections.</h2>",
+    "<h2 style='text-align: center; margin-top: 8px; margin-bottom: 0;'>Stop wasting time on dating apps.</h2>",
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    "<h3 style='text-align: center; margin-top: 8px;'>Meet people who actually match your ambition.</h3>",
     unsafe_allow_html=True
 )
 
@@ -63,13 +67,13 @@ st.markdown(
 )
 
 # -------------------------
-# SOCIAL PROOF
+# SOCIAL PROOF / URGENCY
 # -------------------------
 rows = get_signups()
 count = len(rows)
 
 if count == 0:
-    text = "🔥 Be the first to join"
+    text = "🔥 Limited beta — only 100 spots"
 elif count == 1:
     text = "🔥 1 person already joined"
 else:
@@ -104,7 +108,7 @@ st.markdown("---")
 # -------------------------
 # FORM
 # -------------------------
-st.subheader("Get early access")
+st.subheader("Apply for Early Access")
 
 name = st.text_input("Your name")
 email = st.text_input("Email")
@@ -113,7 +117,7 @@ user_type = st.selectbox(
     ["Entrepreneur", "Professional", "Student", "Other"]
 )
 
-if st.button("🔥 Join the First 100 Users"):
+if st.button("Apply for Early Access"):
     if not name.strip() or not email.strip():
         st.error("Please fill all fields.")
     elif email_exists(email.strip()):
@@ -127,21 +131,22 @@ st.error("⏳ Limited beta: Only 100 spots available")
 
 st.markdown("---")
 
-
 # -------------------------
-# ADMIN PANEL (HIDDEN)
+# HIDDEN ADMIN PANEL
+# Access with: ?admin=true
+# Example: https://alignaapp.streamlit.app/?admin=true
 # -------------------------
 admin_mode = st.query_params.get("admin")
 
 if admin_mode == "true":
     st.markdown("### 🔒 Admin Dashboard")
-
     password = st.text_input("Enter admin password", type="password")
 
     if password == "aligna_admin_2026":
         rows = get_signups()
         st.success(f"Total signups: {len(rows)}")
         st.dataframe(rows)
+
 # -------------------------
 # FOOTER
 # -------------------------
